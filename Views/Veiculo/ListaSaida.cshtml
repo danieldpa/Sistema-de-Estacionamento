@@ -1,0 +1,44 @@
+﻿@model List<VeiculoModel>
+@{
+    ViewData["Title"] = "Histórico de Veículos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">Placa</th>
+            <th scope="col">Horário de Chegada</th>
+            <th scope="col">Horário de Saída</th>
+            <th scope="col">Duração</th>
+            <th scope="col">Tempo Cobrado (hora)</th>
+            <th scope="col">Valor Pago</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (VeiculoModel veiculo in Model)
+            {
+                <tr class ="text-center">
+                    <th scope="row">@veiculo.Id</th>
+                    <td>@veiculo.Placa</td>
+                    <td>@veiculo.HorarioChegada.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@veiculo.HorarioSaida?.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@veiculo.Duracao?.ToString(@"hh\:mm")</td>
+                    <td>@veiculo.TempoCobrado</td>
+                    <td>R$ @veiculo.ValorAPagar?.ToString("0.00")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="8" class="text-center">Nenhum veículo encontrado</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

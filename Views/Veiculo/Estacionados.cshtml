@@ -1,0 +1,64 @@
+﻿@model List<VeiculoModel>
+@{
+    ViewData["Title"] = "Veículos Estacionados";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Campo de pesquisa -->
+<input type="text" id="searchInput" class="form-control mb-3" placeholder="Pesquisar por placa...">
+
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">Placa</th>
+            <th scope="col">Proprietário</th>
+            <th scope="col">Horário de Chegada</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        @if (Model != null && Model.Any())
+        {
+            foreach (VeiculoModel veiculo in Model)
+            {
+                <tr class="text-center">
+                    <td>@veiculo.Id</td>
+                    <td>@veiculo.Placa</td>
+                    <td>@veiculo.Proprietario</td>
+                    <td>@veiculo.HorarioChegada.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a role="button" class="btn btn-danger"
+                               asp-controller="Veiculo"
+                               asp-action="SaidaConfirmacao"
+                               asp-route-id="@veiculo.Id">
+                                Registrar Saída
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">Nenhum Veículo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#tableBody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

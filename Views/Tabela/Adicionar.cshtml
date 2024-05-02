@@ -1,0 +1,41 @@
+﻿@model TabelaPrecoModel
+@{
+    ViewData["Title"] = "Cadastrar Tabela de Preços";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cadastrar Tabela de Preços</h1>
+</div>
+
+<form asp-controller="Tabela" asp-action="Criar" method="post">
+
+    <div class="form-group mb-4">
+        <label for="precoPorHora">Preço Por Hora</label>
+        <input type="text" asp-for="PrecoPorHora" class="form-control" id="precoPorHora" placeholder="Digite o preço por hora">
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="valorHoraAdicional">Valor Hora Adicional</label>
+        <input type="text" asp-for="ValorHoraAdicional" class="form-control" id="valorHoraAdicional" placeholder="Digite o valor da hora adicional">
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="minutoTolerancia">Minutos de Tolerância</label>
+        <input type="number" asp-for="MinutoTolerancia" class="form-control" id="minutoTolerancia" placeholder="Digite os minutos de tolerância">
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="inicioVigencia">Início da Vigência</label>
+        <input type="date" asp-for="InicioVigencia" class="form-control" id="inicioVigencia">
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="finalVigencia">Final da Vigência</label>
+        <input type="date" asp-for="FinalVigencia" class="form-control" id="finalVigencia">
+    </div>
+
+    <div class="mb-4">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a class="btn btn-secondary" asp-controller="Tabela" asp-action="Lista">Voltar</a>
+    </div>
+</form>

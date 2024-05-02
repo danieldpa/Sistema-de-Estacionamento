@@ -1,0 +1,53 @@
+﻿@model VeiculoModel
+@{
+    ViewData["Title"] = "Confirmação de Saída";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <form method="post" asp-controller="Veiculo" asp-action="ConfirmarSaida">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Horário de Chegada</th>
+                    <th scope="col">Horário de Saída</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Tempo Cobrado (hora)</th>
+                    <th scope="col">Preço por Hora</th>
+                    <th scope="col">Valor a Pagar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                    <th scope="row">@Model.Id</th>
+                    <td>@Model.Placa</td>
+                    <td>@Model.HorarioChegada.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@Model.HorarioSaida?.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@Model.Duracao?.ToString(@"hh\:mm")</td>
+                    <td>@Model.TempoCobrado</td>
+                    <td>R$ @Model.Preco?.ToString("0.00")</td>
+                    <td>R$ @Model.ValorAPagar?.ToString("0.00")</td>
+                </tr>
+            </tbody>
+        </table>
+
+        @* Campos ocultos para o modelo *@
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Placa" />
+        <input type="hidden" asp-for="HorarioChegada" />
+        <input type="hidden" asp-for="HorarioSaida" />
+        <input type="hidden" asp-for="Duracao" />
+        <input type="hidden" asp-for="TempoCobrado" />
+        <input type="hidden" asp-for="Preco" />
+        <input type="hidden" asp-for="ValorAPagar" />
+        <input type="hidden" asp-for="Estacionado" />
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Confirmar Saída</button>
+            <a class="btn btn-secondary" asp-controller="Veiculo" asp-action="Estacionados">Voltar</a>
+        </div>
+    </form>
+</div>
